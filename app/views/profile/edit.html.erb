@@ -1,0 +1,15 @@
+<% provide(:title, 'Profile') %>
+<h2>Profile: <%= @profile.user.name %></h2>
+
+<%= form_tag user_profile_path(@profile.user), method: :put do %>
+  <div class='questions'>
+    <% @profile.answers.each do |answer| %>
+      <div id='question_<%= answer.question.id %>' class='form-group'>
+        <%= label_tag "response_#{answer.question.id}", answer.question.title %>
+        <%= text_field_tag "response_#{answer.question.id}", answer.response, class: 'form-control' %>
+      </div>
+    <% end %>
+  </div> 
+
+  <input type='submit' value='Update'/>
+<% end %>

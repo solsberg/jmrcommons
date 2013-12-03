@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-#ruby-gemset=jmrcommons
+#ruby-gemset=commons
 
 gem 'rails', '4.0.1'
 gem 'bootstrap-sass'
@@ -14,6 +14,7 @@ end
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
 

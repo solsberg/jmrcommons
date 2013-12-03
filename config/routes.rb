@@ -1,4 +1,20 @@
 Jmrcommons::Application.routes.draw do
+  root 'pages#home'
+
+  resources :users, path: :members, only: [:index] do
+    resource :profile, controller: 'profile'
+  end
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match "/signup", to: "users#new", via: 'get'
+  match "/signup", to: "users#create", via: 'post'
+  match "/signin", to: "sessions#new", via: 'get'
+  match "/signin", to: "sessions#create", via: 'post'
+  match "/signout", to: "sessions#destroy", via: 'delete'
+  match "/signout", to: "sessions#destroy", via: 'get'
+
+  match "/about", to: "pages#about", via: 'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
