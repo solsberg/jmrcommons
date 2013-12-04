@@ -1,0 +1,11 @@
+<% provide(:title, 'Profile') %>
+<h2>Profile: <%= @profile.user.name %></h2>
+
+<ul class='questions'>
+  <% @profile.responses.each do |answer| %>
+    <li id='question_<%= answer.question.id %>'>
+      <span class='title'><%= answer.question.title %></span>
+      <span class='response'><%= answer.response %></span>
+    </li>
+  <% end %>
+</ul> 

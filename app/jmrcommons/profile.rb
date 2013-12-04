@@ -16,6 +16,10 @@ module JMRCommons
       end
     end
 
+    def responses
+      answers.select { |answer| !answer.response.empty? }
+    end
+
     def update(params)
       params.select { |k,v| k =~ /response_[0-9]+/ }.each do |k, v|
         question_id = k[9..-1].to_i
