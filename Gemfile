@@ -17,6 +17,11 @@ group :test do
   gem 'factory_girl_rails'
 end
 
+group :development do
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
+end
+
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'

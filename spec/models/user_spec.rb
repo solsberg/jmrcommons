@@ -9,6 +9,7 @@ describe User do
   it { should respond_to :password }
   it { should respond_to :password_confirmation }
   it { should respond_to :profile_answers }
+  it { should respond_to :last_active_at }
 
   it { should be_valid }
 
@@ -122,6 +123,36 @@ describe User do
           expect(subject.profile_answers.map(&:text)).not_to include "the answer"
         end 
       end
+    end
+  end
+
+  describe "#timestamp_activity" do
+    context "no current timestamp" do
+      it "should create a timestamp" do
+        subject.timestamp_activity
+        expect(subject.last_active_at).not_to be_nil
+      end
+    end
+
+    it "should update latest activity timestamp" do
+      subject.update_attributes(last_active_at: 5.minutes.ago)
+      first_time = subject.last_active_at
+
+      subject.timestamp_activity
+
+      expect(subject.last_active_at).to be > first_time
+    end
+  end
+
+  describe "#active" do
+    it "should put most recently active users first" do
+      subject.save
+      subject.update_attributes(last_active_at: 5.minutes.ago)
+      first_other_user = FactoryGirl.create(:user)
+      second_other_user = FactoryGirl.create(:user)
+      second_other_user.timestamp_activity
+
+      expect(User.active).to eq [second_other_user, subject, first_other_user]
     end
   end
 end

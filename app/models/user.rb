@@ -29,4 +29,12 @@ class User < ActiveRecord::Base
       current_answer.update_attributes(text: response_text)
     end
   end
+
+  def self.active
+    all.order(last_active_at: :desc)
+  end
+
+  def timestamp_activity
+    update_attributes(last_active_at: Time.now)
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201135353) do
+ActiveRecord::Schema.define(version: 20131204005214) do
 
   create_table "profile_answers", force: true do |t|
     t.string   "text"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131201135353) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_active_at"
   end
 
 end
